@@ -1,10 +1,13 @@
-package org.simulation;
+package org.simulation.map;
+
+import org.simulation.entity.Entity;
 
 import java.util.Objects;
 
 public class Coordinates {
     private int x;
     private int y;
+    private Entity entity;
 
     public Coordinates() {
 
@@ -30,6 +33,9 @@ public class Coordinates {
     public void setY(int y) {
         this.y = y;
     }
+    public Entity getEntity() {
+        return entity;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -42,5 +48,13 @@ public class Coordinates {
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
+    }
+
+    @Override
+    public String toString() {
+        return "Coordinates{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
     }
 }

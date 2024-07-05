@@ -37,6 +37,10 @@ public class Coordinates {
         return entity;
     }
 
+    public void setEntity(Entity entity) {
+        this.entity = entity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

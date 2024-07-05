@@ -31,6 +31,7 @@ public class PathFinderAStar {
         while (!openPathNode.isEmpty()) {
             ListForPathFinding<PathNode> currentPath = openPathNode.poll();
             if (currentPath == null || currentPath.isEmpty()) return null;
+
             PathNode currentNode = currentPath.get(currentPath.size() - 1);
             if (currentNode.equals(goal)) return currentPath;
 
@@ -67,5 +68,21 @@ public class PathFinderAStar {
 
     private int heuristic(Coordinates current, Coordinates next) {
         return (Math.abs(current.getX() - next.getX()) + Math.abs(current.getY()) - next.getY()) * PATH_COST_DIRECT;
+    }
+
+    public PathNode smellVictim (Map map, Coordinates start) {
+        List<Coordinates> coordinatesListVictim = new ArrayList<>(map.getMapCoordinatesEntitiesOfType(victim).keySet());
+        if (coordinatesListVictim.isEmpty()) return null;
+
+        Coordinates cellWithMinCost = coordinatesListVictim.get(0);
+        int minCost = heuristic(start, cellWithMinCost);
+        for (Coordinates currentCoordinate : coordinatesListVictim) {
+            int currentCost = heuristic(start, currentCoordinate);
+            if (currentCost < minCost) {
+                minCost = currentCost;
+                cellWithMinCost = currentCoordinate;
+            }
+        }
+        return new PathNode(cellWithMinCost);
     }
 }

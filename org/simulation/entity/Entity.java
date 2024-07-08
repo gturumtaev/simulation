@@ -3,9 +3,11 @@ package org.simulation.entity;
 import org.simulation.map.Coordinates;
 
 public abstract class Entity {
-    private Coordinates coordinates;
+    protected Coordinates coordinates;
 
-
+    public Entity(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
 
     public Coordinates getCoordinates() {
         return coordinates;

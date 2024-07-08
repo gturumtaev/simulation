@@ -19,7 +19,7 @@ public class PathFinderAStar {
         this.victim = victim;
     }
 
-    public ListForPathFinding<PathNode> getPahToGoal(PathNode start, PathNode goal, Map map) {
+    public ListForPathFinding<PathNode> getPathToGoal(PathNode start, PathNode goal, Map map) {
         PriorityQueue<ListForPathFinding<PathNode>> openPathNode = new PriorityQueue<>();
         HashMap<PathNode, Integer> costFromStart = new HashMap<>();
         costFromStart.put(start, 0);

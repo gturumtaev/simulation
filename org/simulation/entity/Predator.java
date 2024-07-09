@@ -9,10 +9,15 @@ import java.util.List;
 
 public class Predator extends Creature{
 
+    private int speed = 2;
+    private int hp = 15;
     private int attackPower = 5;
 
-    public Predator(Coordinates coordinates, int speed, int hp) {
-        super(coordinates, speed, hp);
+    public Predator() {
+
+    }
+    public Predator(Coordinates coordinates) {
+        super(coordinates);
     }
 
     public int getAttackPower() {

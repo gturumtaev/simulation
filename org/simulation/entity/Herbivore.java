@@ -9,9 +9,14 @@ import java.util.List;
 
 public class Herbivore extends Creature{
 
+    private int speed = 3;
+    private int hp = 10;
 
-    public Herbivore(Coordinates coordinates, int speed, int hp) {
-        super(coordinates, speed, hp);
+    public Herbivore() {
+
+    }
+    public Herbivore(Coordinates coordinates) {
+        super(coordinates);
     }
 
     @Override
@@ -24,6 +29,8 @@ public class Herbivore extends Creature{
                 Coordinates nextCell = path.get(1).getCoordinates();
                 if (map.isEmptyCell(nextCell)) map.moveEntities(this, nextCell);
                 else if (nextCell.getEntity() instanceof Grass) {
+                    this.setHp(this.getHp() + 2);
+                    if (this.getHp() > 10) this.setHp(10);
                     map.removeEntity(nextCell);
                     map.moveEntities(this, nextCell);
                 }

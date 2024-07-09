@@ -58,10 +58,6 @@ public class Map {
         entities.put(entity, newCoordinates);
     }
 
-//    public List<Entity> getEntities() {
-//        return entities;
-//    }
-
     public boolean isEmptyCell(Coordinates coordinates) {
         return coordinates.getEntity() == null;
     }

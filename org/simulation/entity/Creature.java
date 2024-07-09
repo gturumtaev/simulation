@@ -7,10 +7,12 @@ public abstract class Creature extends Entity{
     private int speed;
     private int hp;
 
-    public Creature(Coordinates coordinates, int speed, int hp) {
+    public Creature() {
+
+    }
+
+    public Creature(Coordinates coordinates) {
         super(coordinates);
-        this.speed = speed;
-        this.hp = hp;
     }
 
     public abstract void makeMove(Map map);

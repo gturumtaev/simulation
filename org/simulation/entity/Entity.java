@@ -5,6 +5,10 @@ import org.simulation.map.Coordinates;
 public abstract class Entity {
     protected Coordinates coordinates;
 
+    public Entity() {
+
+    }
+
     public Entity(Coordinates coordinates) {
         this.coordinates = coordinates;
     }

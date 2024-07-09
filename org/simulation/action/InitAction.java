@@ -16,90 +16,79 @@ import java.util.Random;
 public class InitAction extends Action{
     private Map map;
 
-//    public Map initMap() {
-//        map = new Map();
-//        HashMap<Integer, Integer> pool = createObjectPoolForMap(map);
-//        for (int i = 0; i < pool.size(); i++) {
-//            int amountOfEntity = pool.get(i);
-//
-//            for (int j = 0; j < amountOfEntity; j++) {
-//                if (i == 0) {
-//                    Ground ground = new Ground();
-//                    initCoordinateToEntity(ground);
-//                    map.addEntity(ground);
-//                }
-//                if (i == 1) {
-//                    Grass grass = new Grass();
-//                    initCoordinateToEntity(grass);
-//                    map.addEntity(grass);
-//                }
-//                if (i == 2) {
-//                    Herbivore herbivore = new Herbivore();
-//                    initCoordinateToEntity(herbivore);
-//                    map.addEntity(herbivore);
-//                }
-//                if (i == 3) {
-//                    Predator predator = new Predator();
-//                    initCoordinateToEntity(predator);
-//                    map.addEntity(predator);
-//                }
-//                if (i == 4) {
-//                    Tree tree = new Tree();
-//                    initCoordinateToEntity(tree);
-//                    map.addEntity(tree);
-//                }
-//                if (i == 5) {
-//                    Rock rock = new Rock();
-//                    initCoordinateToEntity(rock);
-//                    map.addEntity(rock);
-//                }
-//            }
-//        }
-//        return map;
-//
-//    }
+    public Map initMap() {
+        map = new Map();
+        HashMap<Integer, Integer> pool = createObjectPoolForMap(map);
+        for (int i = 0; i < pool.size(); i++) {
+            int amountOfEntity = pool.get(i);
+
+            for (int j = 0; j < amountOfEntity; j++) {
+                if (i == 0) {
+                    Grass grass = new Grass();
+                    initCoordinateToEntity(grass);
+                    map.addEntity(grass);
+                }
+                if (i == 1) {
+                    Herbivore herbivore = new Herbivore();
+                    initCoordinateToEntity(herbivore);
+                    map.addEntity(herbivore);
+                }
+                if (i == 2) {
+                    Predator predator = new Predator();
+                    initCoordinateToEntity(predator);
+                    map.addEntity(predator);
+                }
+                if (i == 3) {
+                    Tree tree = new Tree();
+                    initCoordinateToEntity(tree);
+                    map.addEntity(tree);
+                }
+                if (i == 4) {
+                    Rock rock = new Rock();
+                    initCoordinateToEntity(rock);
+                    map.addEntity(rock);
+                }
+            }
+        }
+
+        for (int i = 0; i < map.getLength(); i++) {
+            for (int j = 0; j < map.getWidth(); j++) {
+                if (map.getCellByCoordinates(i, j).getEntity() == null) map.addEntity(new Ground(map.getCellByCoordinates(i, j)));
+            }
+        }
+        return map;
+
+    }
 
     private HashMap<Integer, Integer> createObjectPoolForMap(Map map) {
         HashMap<Integer, Integer> objectPool = new HashMap<>();
         int area = map.getWidth() * map.getLength();
 
-        int amountOfGround = area / 2;
-        objectPool.put(0, amountOfGround);
-
         int amountOfGrass = area / 5;
-        objectPool.put(1, amountOfGrass);
+        objectPool.put(0, amountOfGrass);
 
         int amountOfHerbivore = amountOfGrass / 2;
-        objectPool.put(2, amountOfHerbivore);
+        objectPool.put(1, amountOfHerbivore);
 
         int amountOfPredator = amountOfHerbivore / 2;
-        objectPool.put(3, amountOfPredator);
+        objectPool.put(2, amountOfPredator);
 
         int amountOfTrees = amountOfGrass / 2;
-        objectPool.put(4, amountOfTrees);
+        objectPool.put(3, amountOfTrees);
 
         int amountOfRocks = amountOfTrees / 2;
-        objectPool.put(5, amountOfRocks);
+        objectPool.put(4, amountOfRocks);
 
         return objectPool;
     }
 
-//    private <T extends Entity> void initCoordinateToEntity(T entity) {
-//        Coordinates coordinates = null;
-//        do {
-//            coordinates = generateRandomCoordinateToEntity();
-//        } while (!isCellFree(coordinates));
-//        entity.setCoordinates(coordinates);
-//    }
-
-//    private boolean isCellFree(Coordinates coordinates) {
-//        for (Entity entity : map.getEntities()) {
-//            if (entity.getCoordinates().getX() == coordinates.getX() && entity.getCoordinates().getY() == coordinates.getY()) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
+    private <T extends Entity> void initCoordinateToEntity(T entity) {
+        Coordinates coordinates = null;
+        do {
+            coordinates = generateRandomCoordinateToEntity();
+        } while (!map.isEmptyCell(coordinates));
+        map.moveEntities(entity, coordinates);
+    }
 
     private Coordinates generateRandomCoordinateToEntity() {
         Random random = new Random();
